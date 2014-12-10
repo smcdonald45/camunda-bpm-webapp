@@ -53,7 +53,7 @@ public abstract class AbstractClientPluginsFilter<T extends AppPlugin> extends A
     this.appName = appName;
 
     this.pluginPackageFormat = "{ name: '"+appName+"-plugin-%s', location: '%s/api/"+appName+"/plugin/%s/static/app', main: 'plugin.js' }";
-    this.pluginDependencyFormat = "'module:"+appName+".plugin.%s:"+appName+"-plugin-%s'";
+    this.pluginDependencyFormat = "{ ngModuleName: '"+appName+".plugin.%s', requirePackageName: '"+appName+"-plugin-%s' }";
   }
 
   @Override
