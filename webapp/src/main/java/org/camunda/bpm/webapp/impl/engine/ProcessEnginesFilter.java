@@ -13,6 +13,7 @@
 package org.camunda.bpm.webapp.impl.engine;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,17 +27,19 @@ import org.camunda.bpm.cockpit.Cockpit;
 import org.camunda.bpm.cockpit.CockpitRuntimeDelegate;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.authorization.Groups;
+import org.camunda.bpm.webapp.AppRuntimeDelegate;
 import org.camunda.bpm.webapp.impl.IllegalWebAppConfigurationException;
 import org.camunda.bpm.webapp.impl.filter.AbstractTemplateFilter;
 import org.camunda.bpm.webapp.impl.security.SecurityActions;
 import org.camunda.bpm.webapp.impl.security.SecurityActions.SecurityAction;
+import org.camunda.bpm.webapp.plugin.spi.AppPlugin;
 
 /**
  *
  * @author nico.rehwaldt
  * @author Daniel Meyer
  */
-public class ProcessEnginesFilter extends AbstractTemplateFilter {
+public abstract class ProcessEnginesFilter<T extends AppPlugin> extends AbstractTemplateFilter {
 
   protected static final String DEFAULT_APP = "cockpit";
   protected static final String INDEX_PAGE = "index.html";
@@ -45,8 +48,26 @@ public class ProcessEnginesFilter extends AbstractTemplateFilter {
 
   public static final String APP_ROOT_PLACEHOLDER = "$APP_ROOT";
   public static final String BASE_PLACEHOLDER = "$BASE";
+  
+  private final String PLUGIN_DEPENDENCIES = "$PLUGIN_DEPENDENCIES";
+  private final String PLUGIN_PACKAGES = "$PLUGIN_PACKAGES";
+
+  // accepts two times the plugin name
+  protected final String pluginPackageFormat;
+
+  // accepts two times the plugin name
+  protected final String pluginDependencyFormat;
+  
+  protected final AppRuntimeDelegate<T> runtimeDelegate;
 
   public static Pattern APP_PREFIX_PATTERN = Pattern.compile("/app/(?:(\\w+?)/(?:(index\\.html|\\w+)?/?([^\\?]*)?)?)?");
+  
+  public ProcessEnginesFilter(String appName, AppRuntimeDelegate<T> runtimeDelegate) {
+    this.runtimeDelegate = runtimeDelegate;
+    
+    this.pluginPackageFormat = "{ name: '"+appName+"-plugin-%s', location: '%s/api/"+appName+"/plugin/%s/static/app', main: 'plugin.js' }";
+    this.pluginDependencyFormat = "{ ngModuleName: '"+appName+".plugin.%s', requirePackageName: '"+appName+"-plugin-%s' }";
+  }
 
   @Override
   protected void applyFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -172,7 +193,9 @@ public class ProcessEnginesFilter extends AbstractTemplateFilter {
     String data = getWebResourceContents("/app/" + appName + "/index.html");
 
     data = data.replace(APP_ROOT_PLACEHOLDER, contextPath)
-               .replace(BASE_PLACEHOLDER, String.format("%s/app/%s/%s/", contextPath, appName, engineName));
+               .replace(BASE_PLACEHOLDER, String.format("%s/app/%s/%s/", contextPath, appName, engineName))
+               .replace(PLUGIN_PACKAGES, createPluginPackagesStr(contextPath))
+               .replace(PLUGIN_DEPENDENCIES, createPluginDependenciesStr());
 
     response.setContentLength(data.getBytes("UTF-8").length);
     response.setContentType("text/html");
@@ -180,6 +203,46 @@ public class ProcessEnginesFilter extends AbstractTemplateFilter {
     response.getWriter().append(data);
   }
 
+  protected CharSequence createPluginPackagesStr(String contextPath) {
+    final List<T> plugins = getPlugins();
+
+    StringBuilder builder = new StringBuilder();
+
+    for (T plugin : plugins) {
+      if (builder.length() > 0) {
+        builder.append(", ").append("\n");
+      }
+
+      String definition = String.format(pluginPackageFormat, plugin.getId(), contextPath, plugin.getId());
+
+      builder.append(definition);
+    }
+
+    return "[" + builder.toString() + "]";
+  }
+
+  protected List<T> getPlugins() {
+    return runtimeDelegate.getAppPluginRegistry().getPlugins();
+  }
+
+  protected CharSequence createPluginDependenciesStr() {
+    final List<T> plugins = getPlugins();
+
+    StringBuilder builder = new StringBuilder();
+
+    for (T plugin : plugins) {
+      if (builder.length() > 0) {
+        builder.append(", ").append("\n");
+      }
+
+      String definition = String.format(pluginDependencyFormat, plugin.getId(), plugin.getId());
+
+      builder.append(definition);
+    }
+
+    return "[" + builder.toString() + "]";
+  }
+  
   protected String getDefaultEngineName() {
     CockpitRuntimeDelegate runtimeDelegate = Cockpit.getRuntimeDelegate();
 

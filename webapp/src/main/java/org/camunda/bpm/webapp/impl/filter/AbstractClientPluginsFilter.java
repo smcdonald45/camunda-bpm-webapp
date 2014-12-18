@@ -36,8 +36,8 @@ import org.camunda.bpm.webapp.plugin.spi.AppPlugin;
  */
 public abstract class AbstractClientPluginsFilter<T extends AppPlugin> extends AbstractTemplateFilter {
 
-  private final String PLUGIN_DEPENDENCIES = "window.PLUGIN_DEPENDENCIES";
-  private final String PLUGIN_PACKAGES = "window.PLUGIN_PACKAGES";
+  private final String PLUGIN_DEPENDENCIES = "$PLUGIN_DEPENDENCIES";
+  private final String PLUGIN_PACKAGES = "$PLUGIN_PACKAGES";
 
   // accepts two times the plugin name
   protected final String pluginPackageFormat;
@@ -58,17 +58,23 @@ public abstract class AbstractClientPluginsFilter<T extends AppPlugin> extends A
 
   @Override
   protected void applyFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-
-    String data = getWebResourceContents(request.getRequestURI().replaceFirst(request.getContextPath(), ""));
-
-    data = data.replace(PLUGIN_PACKAGES, createPluginPackagesStr(request));
-
-    data = data.replace(PLUGIN_DEPENDENCIES, createPluginDependenciesStr());
-
-    response.setContentLength(data.getBytes("UTF-8").length);
-    response.setContentType("text/javascript;charset=UTF-8");
-
-    response.getWriter().append(data);
+    System.out.println("<<<<<<<<<<<<<<<<<<<<<<<< " + request.getRequestURI() + ">>>>>>>>>>>>>>>>>>>>>>>>>>");
+    
+    String requestURI = request.getRequestURI();
+    if(requestURI.equals("/camunda/app/cockpit/default/")) {
+      String data = getWebResourceContents("/app/cockpit/index.html");
+      
+      data = data.replace(PLUGIN_PACKAGES, createPluginPackagesStr(request));
+      
+      data = data.replace(PLUGIN_DEPENDENCIES, createPluginDependenciesStr());
+      
+      response.setContentLength(data.getBytes("UTF-8").length);
+      response.setContentType("text/html");
+//      response.setContentType("text/javascript;charset=UTF-8");
+      
+      response.getWriter().append(data);
+    }
+    
   }
 
   protected CharSequence createPluginPackagesStr(HttpServletRequest request) {
