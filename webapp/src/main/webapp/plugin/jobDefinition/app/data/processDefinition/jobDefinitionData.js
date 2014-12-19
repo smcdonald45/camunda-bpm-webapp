@@ -1,4 +1,4 @@
-ngDefine('cockpit.plugin.jobDefinition.data', function(module) {
+define(['angular'], function(angular) {
 
   var Controller = [ '$scope', 'processData', 'JobDefinitionResource',
       function ($scope, processData, JobDefinitionResource) {
@@ -30,10 +30,10 @@ ngDefine('cockpit.plugin.jobDefinition.data', function(module) {
     DataProvider.registerData('cockpit.processDefinition.data', {
       id: 'job-definitions-data',
       controller: Controller
-    }); 
+    });
   };
 
   Configuration.$inject = ['DataProvider'];
 
-  module.config(Configuration);
+  return Configuration;
 });

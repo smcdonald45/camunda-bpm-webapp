@@ -1,8 +1,8 @@
-/* global ngDefine: false */
-ngDefine('cockpit.plugin.jobDefinition.views', function(module) {
+/* global define: false */
+define(['angular'], function(angular) {
   'use strict';
 
-  module.controller('JobDefinitionSuspensionStateController', [
+  return [
           '$scope', '$http', '$filter', 'Uri', 'Notifications', '$modalInstance', 'jobDefinition',
   function($scope,   $http,   $filter,   Uri,   Notifications,   $modalInstance,   jobDefinition) {
 
@@ -75,6 +75,6 @@ ngDefine('cockpit.plugin.jobDefinition.views', function(module) {
 
     };
 
-  }]);
+  }];
 });
 

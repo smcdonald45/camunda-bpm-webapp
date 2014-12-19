@@ -1,4 +1,4 @@
-ngDefine('cockpit.plugin.jobDefinition.views', function(module) {
+define(['text!./job-definition-suspension-overlay.html'], function(template) {
 
   var Controller = [ '$scope', function ($scope) {
 
@@ -28,13 +28,13 @@ ngDefine('cockpit.plugin.jobDefinition.views', function(module) {
 
     ViewsProvider.registerDefaultView('cockpit.processDefinition.diagram.overlay', {
       id: 'job-definition-diagram-overlay',
-      url: 'plugin://jobDefinition/static/app/views/processDefinition/job-definition-suspension-overlay.html',
+      template: template,
       controller: Controller,
       priority: 10
-    }); 
+    });
   };
 
   Configuration.$inject = ['ViewsProvider'];
 
-  module.config(Configuration);
+  return Configuration;
 });

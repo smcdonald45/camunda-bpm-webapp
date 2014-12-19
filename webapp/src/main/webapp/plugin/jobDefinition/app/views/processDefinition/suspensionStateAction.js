@@ -1,11 +1,11 @@
-/* global ngDefine: false, angular: false */
-ngDefine('cockpit.plugin.jobDefinition.views', ['require'], function(module, require) {
+/* global define: false, angular: false */
+define(['angular', 'text!./suspension-state-action.html', 'text!./job-definition-suspension-state-dialog.html'], function(angular, actionTemplate, dialogTemplate) {
   'use strict';
 
   var Configuration = function PluginConfiguration(ViewsProvider) {
     ViewsProvider.registerDefaultView('cockpit.jobDefinition.action', {
       id: 'update-suspension-state',
-      url: 'plugin://jobDefinition/static/app/views/processDefinition/suspension-state-action.html',
+      template: actionTemplate,
       controller: [
               '$scope', '$rootScope', 'search', '$modal',
       function($scope, $rootScope, search, $modal) {
@@ -16,7 +16,7 @@ ngDefine('cockpit.plugin.jobDefinition.views', ['require'], function(module, req
               jobDefinition: function() { return jobDefinition; }
             },
             controller: 'JobDefinitionSuspensionStateController',
-            templateUrl: require.toUrl('./job-definition-suspension-state-dialog.html')
+            template: dialogTemplate
           });
 
           dialog.result.then(function(result) {
@@ -40,5 +40,5 @@ ngDefine('cockpit.plugin.jobDefinition.views', ['require'], function(module, req
 
   Configuration.$inject = ['ViewsProvider'];
 
-  module.config(Configuration);
+  return Configuration;
 });

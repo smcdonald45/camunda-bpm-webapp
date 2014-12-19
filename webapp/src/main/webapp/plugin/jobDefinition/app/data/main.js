@@ -1,5 +1,9 @@
-ngDefine('cockpit.plugin.jobDefinition.data', [
+define(['angular',
   './processDefinition/jobDefinitionData'
-], function(module) {
+], function(angular, jobDefinitionData) {
+  var ngModule = angular.module('cockpit.plugin.jobDefinition.data', []);
 
+  ngModule.config(jobDefinitionData);
+
+  return ngModule;
 });

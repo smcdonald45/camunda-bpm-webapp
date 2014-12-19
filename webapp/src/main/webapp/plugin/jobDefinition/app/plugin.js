@@ -1,6 +1,4 @@
-ngDefine('cockpit.plugin.jobDefinition', [
-  'module:cockpit.plugin.jobDefinition.views:./views/main',
-  'module:cockpit.plugin.jobDefinition.data:./data/main'
-], function(module) {
-  return module;
+define(['angular', './views/main', './data/main'],
+function(angular, viewsModule, dataModule) {
+  return angular.module('cockpit.plugin.jobDefinition', [viewsModule.name, dataModule.name]);
 });
