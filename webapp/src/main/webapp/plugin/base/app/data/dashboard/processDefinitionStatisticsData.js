@@ -1,4 +1,8 @@
-ngDefine('cockpit.plugin.base.data', function(module) {
+define([
+
+],function(
+
+) {
 
   var Controller = [ '$scope', 'processData', 'ProcessDefinitionResource',
       function ($scope, processData, ProcessDefinitionResource) {
@@ -100,7 +104,7 @@ ngDefine('cockpit.plugin.base.data', function(module) {
           });
 
           return result;
-        };        
+        };
 
   }];
 
@@ -112,7 +116,6 @@ ngDefine('cockpit.plugin.base.data', function(module) {
     }); 
   };
 
-  Configuration.$inject = ['DataProvider'];
+  return ['DataProvider', Configuration];
 
-  module.config(Configuration);
 });

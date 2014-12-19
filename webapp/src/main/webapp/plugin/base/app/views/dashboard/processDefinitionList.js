@@ -1,8 +1,9 @@
-/* global ngDefine: false */
-ngDefine('cockpit.plugin.base.views', function(module) {
+define([
+], function(
+) {
   'use strict';
 
-  var PluginConfiguration = [ 'ViewsProvider', function PluginConfiguration(ViewsProvider) {
+  return [ 'ViewsProvider', function PluginConfiguration(ViewsProvider) {
     ViewsProvider.registerDefaultView('cockpit.dashboard', {
       id: 'process-definition-list',
       label: 'Deployed Processes',
@@ -23,9 +24,5 @@ ngDefine('cockpit.plugin.base.views', function(module) {
       priority: 5
     });
   }];
-
-  module.config(PluginConfiguration);
-
-  return module;
 
 });

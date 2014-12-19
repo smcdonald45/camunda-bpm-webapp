@@ -1,9 +1,18 @@
-ngDefine('cockpit.plugin.base.data', [
-  // dashboard
+define([
+  'angular',
   './dashboard/processDefinitionStatisticsData',
-  
-  // process definition
-  './processDefinition/activityInstanceStatisticsData',
-], function(module) {
+  './processDefinition/activityInstanceStatisticsData'
+], function(
+  angular,
+  processDefinitionStatisticsData,
+  activityInstanceStatisticsData
+) {
 
+  var ngModule = angular.module('cockpit.plugin.base.data', []);
+
+  ngModule.config(processDefinitionStatisticsData);
+  ngModule.config(activityInstanceStatisticsData);
+
+  return ngModule;
 });
+

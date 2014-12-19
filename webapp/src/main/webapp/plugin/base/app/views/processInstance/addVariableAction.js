@@ -1,7 +1,9 @@
-/* global ngDefine: false, angular: false */
-ngDefine('cockpit.plugin.base.views', ['require'], function(module, require) {
+define([
+], function(
+) {
   'use strict';
-  var Configuration = function PluginConfiguration(ViewsProvider) {
+
+  return ['ViewsProvider', function PluginConfiguration(ViewsProvider) {
     ViewsProvider.registerDefaultView('cockpit.processInstance.runtime.action', {
       id: 'add-variable-action',
       label: 'Add Variable Action',
@@ -32,9 +34,6 @@ ngDefine('cockpit.plugin.base.views', ['require'], function(module, require) {
       }],
       priority: 10
     });
-  };
+  }];
 
-  Configuration.$inject = ['ViewsProvider'];
-
-  module.config(Configuration);
 });

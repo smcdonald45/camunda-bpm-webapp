@@ -1,35 +1,21 @@
-/* global ngDefine: false */
+define([
+  'angular',
+  './dashboard/main',
+  './processDefinition/main',
+  './processInstance/main'
+], function(
+  angular,
+  dashboardModule,
+  processDefinitionModule,
+  processInstanceModule
+) {
 
-/**
- * @namespace cam.cockpit.plugin.base.views
- */
-ngDefine('cockpit.plugin.base.views', [
-  // dashboard
-  './dashboard/processDefinitionList',
-  './dashboard/processDefinitionTiles',
+  var ngModule = angular.module('cockpit.plugin.base.views', [
+    dashboardModule.name,
+    processDefinitionModule.name,
+    processInstanceModule.name
+  ]);
 
-  // process definition
-  './processDefinition/processInstanceTable',
-  './processDefinition/calledProcessDefinitionTable',
-  './processDefinition/updateSuspensionStateAction',
-  './processDefinition/updateSuspensionStateDialog',
-  './processDefinition/activityInstanceStatisticsOverlay',
+  return ngModule;
 
-  // process instance
-  './processInstance/variableInstancesTab',
-  './processInstance/variableInstanceUploadDialog',
-  './processInstance/variableInstanceInspectDialog',
-  './processInstance/incidentsTab',
-  './processInstance/calledProcessInstanceTable',
-  './processInstance/userTasksTable',
-  './processInstance/jobRetryBulkAction',
-  './processInstance/jobRetryBulkDialog',
-  './processInstance/jobRetryDialog',
-  './processInstance/cancelProcessInstanceAction',
-  './processInstance/cancelProcessInstanceDialog',
-  './processInstance/addVariableAction',
-  './processInstance/addVariableDialog',
-  './processInstance/updateSuspensionStateAction',
-  './processInstance/updateSuspensionStateDialog',
-  './processInstance/activityInstanceStatisticsOverlay'
-], function() {});
+});

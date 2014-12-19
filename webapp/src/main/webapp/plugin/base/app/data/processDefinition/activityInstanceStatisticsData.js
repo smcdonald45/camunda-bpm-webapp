@@ -1,4 +1,8 @@
-ngDefine('cockpit.plugin.base.data', function(module) {
+define([
+
+],function(
+
+) {
 
   var Controller = [ '$scope', 'processData', 'ProcessDefinitionResource',
       function ($scope, processData, ProcessDefinitionResource) {
@@ -14,10 +18,8 @@ ngDefine('cockpit.plugin.base.data', function(module) {
     DataProvider.registerData('cockpit.processDefinition.data', {
       id: 'activity-instance-statistics-data',
       controller: Controller
-    }); 
+    });
   };
 
-  Configuration.$inject = ['DataProvider'];
-
-  module.config(Configuration);
+  return ['DataProvider', Configuration];
 });

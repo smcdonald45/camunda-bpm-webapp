@@ -1,8 +1,9 @@
-/* global ngDefine: false */
-ngDefine('cockpit.plugin.base.views', function(module) {
+define([
+], function(
+) {
   'use strict';
 
-  var Configuration = function PluginConfiguration(ViewsProvider) {
+  return ['ViewsProvider', function PluginConfiguration(ViewsProvider) {
 
     ViewsProvider.registerDefaultView('cockpit.processInstance.diagram.overlay', {
       id: 'activity-instance-statistics-overlay',
@@ -30,9 +31,6 @@ ngDefine('cockpit.plugin.base.views', function(module) {
       }],
       priority: 20
     });
-  };
+  }];
 
-  Configuration.$inject = ['ViewsProvider'];
-
-  module.config(Configuration);
 });

@@ -1,8 +1,9 @@
-/* global ngDefine: false, angular: false */
-ngDefine('cockpit.plugin.base.views', function(module) {
+define([
+], function(
+) {
   'use strict';
 
-  var Configuration = [ 'ViewsProvider', function(ViewsProvider) {
+  return [ 'ViewsProvider', function(ViewsProvider) {
 
     ViewsProvider.registerDefaultView('cockpit.processDefinition.runtime.tab', {
       id: 'call-process-definitions-table',
@@ -66,5 +67,4 @@ ngDefine('cockpit.plugin.base.views', function(module) {
     });
   }];
 
-  module.config(Configuration);
 });

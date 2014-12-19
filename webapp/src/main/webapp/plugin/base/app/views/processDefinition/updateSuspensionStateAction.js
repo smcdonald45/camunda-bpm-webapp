@@ -1,7 +1,9 @@
-/* global ngDefine: false, angular: false */
-ngDefine('cockpit.plugin.base.views', ['require'], function(module, require) {
+define([
+], function(
+) {
   'use strict';
-  var Configuration = ['ViewsProvider', function(ViewsProvider) {
+
+  return ['ViewsProvider', function(ViewsProvider) {
     ViewsProvider.registerDefaultView('cockpit.processDefinition.runtime.action', {
       id: 'update-suspension-state-action',
       label: 'Update Suspension State',
@@ -38,7 +40,5 @@ ngDefine('cockpit.plugin.base.views', ['require'], function(module, require) {
       priority: 50
     });
   }];
-
-  module.config(Configuration);
 
 });

@@ -1,9 +1,29 @@
-/* global ngDefine: false, angular: false */
-ngDefine('cockpit.plugin.base.views', function(module) {
+define([
+], function(
+) {
   'use strict';
-  module.controller('AddVariableController', [
-          '$scope', '$http', 'Uri', 'Notifications', '$modalInstance', 'processInstance',
-  function($scope,   $http,   Uri,   Notifications,   $modalInstance,   processInstance) {
+
+  return [
+    '$provide',
+  function(
+    $provide
+  ) {
+
+    $provide.controller('AddVariableController', [
+      '$scope',
+      '$http',
+      'Uri',
+      'Notifications',
+      '$modalInstance',
+      'processInstance',
+    function(
+      $scope,
+      $http,
+      Uri,
+      Notifications,
+      $modalInstance,
+      processInstance
+    ) {
 
     $scope.variableTypes = [
       'String',
@@ -75,4 +95,6 @@ ngDefine('cockpit.plugin.base.views', function(module) {
       });
     };
   }]);
+
+  }];
 });
