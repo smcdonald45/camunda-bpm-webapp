@@ -1,11 +1,11 @@
-/* global ngDefine: false, angular: false */
-ngDefine('cockpit.plugin.base.views', ['require'], function(module, require) {
+/* global define: false, angular: false */
+define(['angular', 'text!./add-variable-action.html', 'text!./add-variable-dialog.html'], function(angular, actionTemplate, dialogTemplate) {
   'use strict';
   var Configuration = function PluginConfiguration(ViewsProvider) {
     ViewsProvider.registerDefaultView('cockpit.processInstance.runtime.action', {
       id: 'add-variable-action',
       label: 'Add Variable Action',
-      url: 'plugin://base/static/app/views/processInstance/add-variable-action.html',
+      template: actionTemplate,
       controller: [
               '$scope', '$modal',
       function($scope,   $modal) {
@@ -17,7 +17,7 @@ ngDefine('cockpit.plugin.base.views', ['require'], function(module, require) {
               processInstance: function() { return $scope.processInstance; }
             },
             controller: 'AddVariableController',
-            templateUrl: require.toUrl('./add-variable-dialog.html')
+            template: dialogTemplate
           });
 
           dialog.result.then(function(result) {
@@ -36,5 +36,5 @@ ngDefine('cockpit.plugin.base.views', ['require'], function(module, require) {
 
   Configuration.$inject = ['ViewsProvider'];
 
-  module.config(Configuration);
+  return Configuration;
 });

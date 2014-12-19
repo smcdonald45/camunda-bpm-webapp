@@ -1,7 +1,7 @@
-/* global ngDefine: false, angular: false */
-ngDefine('cockpit.plugin.base.views', function(module) {
+/* global define: false, angular: false */
+define(['angular'], function(angular) {
   'use strict';
-  module.controller('AddVariableController', [
+  return [
           '$scope', '$http', 'Uri', 'Notifications', '$modalInstance', 'processInstance',
   function($scope,   $http,   Uri,   Notifications,   $modalInstance,   processInstance) {
 
@@ -74,5 +74,5 @@ ngDefine('cockpit.plugin.base.views', function(module) {
         });
       });
     };
-  }]);
+  }];
 });

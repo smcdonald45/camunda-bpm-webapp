@@ -1,12 +1,12 @@
-/* global ngDefine: false */
-ngDefine('cockpit.plugin.base.views', function(module) {
+/* global define: false */
+define(['text!./activity-instance-statistics-overlay.html'], function(template) {
   'use strict';
 
   var Configuration = function PluginConfiguration(ViewsProvider) {
 
     ViewsProvider.registerDefaultView('cockpit.processInstance.diagram.overlay', {
       id: 'activity-instance-statistics-overlay',
-      url: 'plugin://base/static/app/views/processInstance/activity-instance-statistics-overlay.html',
+      template: template,
       controller: [
                '$scope',
       function ($scope) {
@@ -34,5 +34,5 @@ ngDefine('cockpit.plugin.base.views', function(module) {
 
   Configuration.$inject = ['ViewsProvider'];
 
-  module.config(Configuration);
+  return Configuration;
 });

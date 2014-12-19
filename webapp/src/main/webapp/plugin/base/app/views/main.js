@@ -1,9 +1,11 @@
-/* global ngDefine: false */
+/* global define: false */
 
 /**
  * @namespace cam.cockpit.plugin.base.views
  */
-ngDefine('cockpit.plugin.base.views', [
+define([
+  'angular',
+
   // dashboard
   './dashboard/processDefinitionList',
   './dashboard/processDefinitionTiles',
@@ -32,4 +34,63 @@ ngDefine('cockpit.plugin.base.views', [
   './processInstance/updateSuspensionStateAction',
   './processInstance/updateSuspensionStateDialog',
   './processInstance/activityInstanceStatisticsOverlay'
-], function() {});
+], function(
+  angular,
+
+  // dashboard
+  processDefinitionList,
+  processDefinitionTiles,
+
+  // process definition
+  processInstanceTable,
+  calledProcessDefinitionTable,
+  updateSuspensionStateAction,
+  updateSuspensionStateDialog,
+  activityInstanceStatisticsOverlay,
+
+  // process instance
+  variableInstancesTab,
+  variableInstanceUploadDialog,
+  variableInstanceInspectDialog,
+  incidentsTab,
+  calledProcessInstanceTable,
+  userTasksTable,
+  jobRetryBulkAction,
+  jobRetryBulkDialog,
+  jobRetryDialog,
+  cancelProcessInstanceAction,
+  cancelProcessInstanceDialog,
+  addVariableAction,
+  addVariableDialog,
+  updateSuspensionStateActionPI,
+  updateSuspensionStateDialogPI,
+  activityInstanceStatisticsOverlayPI) {
+
+  var ngModule = angular.module('cockpit.plugin.base.views', []);
+
+  ngModule.config(processDefinitionList);
+  ngModule.config(processDefinitionTiles);
+
+  ngModule.config(processInstanceTable);
+  ngModule.config(calledProcessDefinitionTable);
+  ngModule.config(updateSuspensionStateAction);
+  ngModule.controller('UpdateProcessDefinitionSuspensionStateController', updateSuspensionStateDialog);
+  ngModule.config(activityInstanceStatisticsOverlay);
+
+  variableInstancesTab(ngModule);
+  ngModule.controller('VariableInstanceUploadController', variableInstanceUploadDialog);
+  ngModule.controller('VariableInstanceInspectController', variableInstanceInspectDialog);
+  ngModule.config(incidentsTab);
+  calledProcessInstanceTable(ngModule);
+  userTasksTable(ngModule);
+  jobRetryBulkAction(ngModule);
+  ngModule.controller('JobRetriesController', jobRetryBulkDialog);
+  ngModule.controller('JobRetryController', jobRetryDialog);
+  cancelProcessInstanceAction(ngModule);
+  ngModule.controller('CancelProcessInstanceController', cancelProcessInstanceDialog);
+  ngModule.config(addVariableAction);
+  ngModule.controller('AddVariableController', addVariableDialog);
+  ngModule.config(updateSuspensionStateActionPI);
+  ngModule.controller('UpdateProcessInstanceSuspensionStateController', updateSuspensionStateDialogPI);
+  ngModule.config(activityInstanceStatisticsOverlayPI);
+});

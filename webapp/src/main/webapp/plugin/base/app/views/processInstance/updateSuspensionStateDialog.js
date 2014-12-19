@@ -1,8 +1,8 @@
-/* global ngDefine: false */
-ngDefine('cockpit.plugin.base.views', function(module) {
+/* global define: false */
+define([], function() {
   'use strict';
 
-  module.controller('UpdateProcessInstanceSuspensionStateController', [
+  return [
           '$scope', '$http', '$filter', 'Uri', 'Notifications', '$modalInstance', 'processInstance',
   function($scope,   $http,   $filter,   Uri,   Notifications,   $modalInstance,   processInstance) {
 
@@ -55,5 +55,5 @@ ngDefine('cockpit.plugin.base.views', function(module) {
       $modalInstance.close(response);
     };
 
-  }]);
+  }];
 });

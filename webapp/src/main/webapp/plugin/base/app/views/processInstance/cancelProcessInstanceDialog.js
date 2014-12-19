@@ -1,7 +1,7 @@
-/* global ngDefine: false */
-ngDefine('cockpit.plugin.base.views', function(module) {
+/* global define: false */
+define([], function() {
   'use strict';
-  module.controller('CancelProcessInstanceController', [
+  return [
           '$scope', '$location', 'Notifications', 'ProcessInstanceResource', '$modalInstance', 'processInstance', 'processData',
   function($scope,   $location,   Notifications,   ProcessInstanceResource,   $modalInstance,   processInstance,   processData) {
 
@@ -67,5 +67,5 @@ ngDefine('cockpit.plugin.base.views', function(module) {
         $location.replace();
       }
     };
-  }]);
+  }];
 });

@@ -1,8 +1,8 @@
-/* global ngDefine: false */
-ngDefine('cockpit.plugin.base.resources', function(module) {
+/* global define: false */
+define([], function() {
   'use strict';
 
-  module.factory('PluginProcessInstanceResource', [
+  return [
     '$resource',
     'Uri',
   function ($resource, Uri) {
@@ -41,5 +41,5 @@ ngDefine('cockpit.plugin.base.resources', function(module) {
         }
       }
     });
-  }]);
+  }];
 });

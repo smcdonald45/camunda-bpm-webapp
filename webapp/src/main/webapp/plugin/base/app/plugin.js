@@ -1,4 +1,4 @@
-/* global ngDefine: false */
+/* global define: false */
 
 /**
  * @namespace cam.cockpit.plugin
@@ -7,10 +7,10 @@
 /**
  * @namespace cam.cockpit.plugin.base
  */
-ngDefine('cockpit.plugin.base', [
-  'module:cockpit.plugin.base.views:./views/main',
-  'module:cockpit.plugin.base.resources:./resources/main',
-  'module:cockpit.plugin.base.data:./data/main'
-], function(module) {
-  return module;
+define(['angular',
+        './views/main',
+        './resources/main',
+        './data/main'
+], function(angular, viewsModule, resourcesModule, dataModule) {
+  return angular.module('cockpit.plugin.base', [viewsModule.name, resourcesModule.name, dataModule.name]);
 });

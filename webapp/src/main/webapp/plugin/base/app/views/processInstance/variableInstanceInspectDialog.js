@@ -1,8 +1,8 @@
-/* global ngDefine: false, angular: false */
-ngDefine('cockpit.plugin.base.views', function(module) {
+/* global define: false, angular: false */
+define(['angular'], function(angular) {
   'use strict';
 
-  module.controller('VariableInstanceInspectController', [
+  return [
           '$scope', '$location', '$http', 'Notifications', '$modalInstance', 'Uri', 'variableInstance',
   function($scope,   $location,   $http,   Notifications,   $modalInstance,   Uri,   variableInstance) {
 
@@ -150,7 +150,7 @@ ngDefine('cockpit.plugin.base.views', function(module) {
             uploadComplete(newValue);
           }, false);
           xhr.open('POST', $scope.getSerializableVariableUploadUrl());
-          xhr.send(fd); 
+          xhr.send(fd);
         }
 
 
@@ -160,7 +160,7 @@ ngDefine('cockpit.plugin.base.views', function(module) {
 
     // load deserialized value:
     $http({
-      method: 'GET', 
+      method: 'GET',
       url: Uri.appUri('engine://engine/:engine/variable-instance/'+variableInstance.id)
     }).success(function(data, status) {
       if(!data.errorMessage) {
@@ -194,5 +194,5 @@ ngDefine('cockpit.plugin.base.views', function(module) {
       $modalInstance.dismiss();
     });
 
-  }]);
+  }];
 });

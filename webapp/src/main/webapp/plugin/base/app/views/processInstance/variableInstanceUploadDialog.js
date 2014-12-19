@@ -1,8 +1,8 @@
-/* global ngDefine: false */
-ngDefine('cockpit.plugin.base.views', function(module) {
+/* global define: false */
+define([], function() {
   'use strict';
 
-  module.controller('VariableInstanceUploadController', [
+  return [
           '$scope', '$location', 'Notifications', '$modalInstance', 'Uri', 'variableInstance',
   function($scope,   $location,   Notifications,   $modalInstance,   Uri,   variableInstance) {
 
@@ -69,5 +69,5 @@ ngDefine('cockpit.plugin.base.views', function(module) {
     $scope.close = function (status) {
       $modalInstance.close(status);
     };
-  }]);
+  }];
 });

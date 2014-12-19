@@ -1,8 +1,8 @@
-/* global ngDefine: false */
-ngDefine('cockpit.plugin.base.views', function(module) {
+/* global define: false */
+define([], function() {
   'use strict';
 
-  module.controller('JobRetryController', [
+  return [
            '$scope', '$location', 'Notifications', 'JobResource', '$modalInstance', 'incident',
   function ($scope,   $location,   Notifications,   JobResource,   $modalInstance,   incident) {
 
@@ -42,5 +42,5 @@ ngDefine('cockpit.plugin.base.views', function(module) {
     $scope.close = function (status) {
       $modalInstance.close(status);
     };
-  }]);
+  }];
 });

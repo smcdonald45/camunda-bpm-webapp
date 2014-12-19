@@ -1,12 +1,12 @@
-/* global ngDefine: false */
-ngDefine('cockpit.plugin.base.views', function(module) {
+/* global define: false */
+define(['text!./activity-instance-statistics-overlay.html'], function(template) {
   'use strict';
 
-  var Configuration = [ 'ViewsProvider', function(ViewsProvider) {
+  return [ 'ViewsProvider', function(ViewsProvider) {
 
     ViewsProvider.registerDefaultView('cockpit.processDefinition.diagram.overlay', {
       id: 'activity-instance-statistics-overlay',
-      url: 'plugin://base/static/app/views/processDefinition/activity-instance-statistics-overlay.html',
+      template: template,
       controller: [
                '$scope',
       function ($scope) {
@@ -36,6 +36,4 @@ ngDefine('cockpit.plugin.base.views', function(module) {
       priority: 20
     });
   }];
-
-  module.config(Configuration);
 });

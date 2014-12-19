@@ -1,12 +1,12 @@
-/* global ngDefine: false, angular: false */
-ngDefine('cockpit.plugin.base.views', ['require'], function(module, require) {
+/* global define: false, angular: false */
+define(['angular', 'text!./update-suspension-state-action.html', 'text!./update-suspension-state-dialog.html'], function(angular, actionTemplate, dialogTemplate) {
   'use strict';
 
   var Configuration = function PluginConfiguration(ViewsProvider) {
     ViewsProvider.registerDefaultView('cockpit.processInstance.runtime.action', {
       id: 'update-suspension-state-action',
       label: 'Update Suspension State',
-      url: 'plugin://base/static/app/views/processInstance/update-suspension-state-action.html',
+      template:actionTemplate,
       controller: [
           '$scope', '$rootScope', '$modal',
       function($scope,   $rootScope,   $modal) {
@@ -18,7 +18,7 @@ ngDefine('cockpit.plugin.base.views', ['require'], function(module, require) {
               processInstance: function() { return $scope.processInstance; }
             },
             controller: 'UpdateProcessInstanceSuspensionStateController',
-            templateUrl: require.toUrl('./update-suspension-state-dialog.html')
+            template: dialogTemplate
           });
 
           dialog.result.then(function(result) {
@@ -41,6 +41,6 @@ ngDefine('cockpit.plugin.base.views', ['require'], function(module, require) {
 
   Configuration.$inject = ['ViewsProvider'];
 
-  module.config(Configuration);
+  return Configuration;
 
 });

@@ -1,12 +1,12 @@
-/* global ngDefine: false, angular: false */
-ngDefine('cockpit.plugin.base.views', ['require'], function(module, require) {
+/* global define: false, angular: false */
+define(['angular', 'text!./incidents-tab.html', 'text!./job-retry-dialog.html'], function(angular, incidentsTemplate, retryTemplate) {
   'use strict';
 
   var Configuration = function PluginConfiguration(ViewsProvider) {
     ViewsProvider.registerDefaultView('cockpit.processInstance.runtime.tab', {
       id: 'incidents-tab',
       label: 'Incidents',
-      url: 'plugin://base/static/app/views/processInstance/incidents-tab.html',
+      template: incidentsTemplate,
       controller: [
                '$scope', '$http', '$modal', 'search', 'Uri',
       function ($scope,   $http,   $modal,   search,   Uri) {
@@ -101,7 +101,7 @@ ngDefine('cockpit.plugin.base.views', ['require'], function(module, require) {
               incident: function() { return incident; }
             },
             controller: 'JobRetryController',
-            templateUrl: require.toUrl('./job-retry-dialog.html')
+            template: retryTemplate
           });
 
           dialog.result.then(function(result) {
@@ -119,5 +119,5 @@ ngDefine('cockpit.plugin.base.views', ['require'], function(module, require) {
 
   Configuration.$inject = ['ViewsProvider'];
 
-  module.config(Configuration);
+  return Configuration;
 });

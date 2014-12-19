@@ -1,13 +1,13 @@
-/* global ngDefine: false, angular: false */
-ngDefine('cockpit.plugin.base.views', function(module) {
+/* global define: false, angular: false */
+define(['angular', 'text!./process-instance-table.html'], function(angular, template) {
   'use strict';
 
-  var Configuration = [ 'ViewsProvider', function(ViewsProvider) {
+  return [ 'ViewsProvider', function(ViewsProvider) {
 
     ViewsProvider.registerDefaultView('cockpit.processDefinition.runtime.tab', {
       id: 'process-instances-table',
       label: 'Process Instances',
-      url: 'plugin://base/static/app/views/processDefinition/process-instance-table.html',
+      template: template,
       controller: [
                '$scope', 'search', 'PluginProcessInstanceResource',
       function ($scope,   search,   PluginProcessInstanceResource) {
@@ -93,6 +93,4 @@ ngDefine('cockpit.plugin.base.views', function(module) {
       priority: 10
     });
   }];
-
-  module.config(Configuration);
 });
