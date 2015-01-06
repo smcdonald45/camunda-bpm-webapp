@@ -25,23 +25,18 @@ module.exports = function(config) {
 
     core: {
       options: {
-        packages: [{"name":"cockpit-plugin-base",
-                    "location":"'<%= pkg.gruntConfig.pluginDir %>/base/app/"}
-                   ],
-        baseUrl: '<%= pkg.gruntConfig.pluginDir %>',
         out: '<%= pkg.gruntConfig.buildTarget %>/base/app/plugin.js',
         include: ['base/app/plugin'],
-        exclude: ['text']
+        exclude: ['text'],
+        insertRequire: ['base/app/plugin']
       }
     },
     jobDefinition: {
       options: {
-        packages: [{"name":"cockpit-plugin-jobDefinition",
-                    "location":"<%= pkg.gruntConfig.pluginDir %>/jobDefinition/app/"}],
-        baseUrl: '<%= pkg.gruntConfig.pluginDir %>',
         out: '<%= pkg.gruntConfig.buildTarget %>/jobDefinition/app/plugin.js',
         include: ['jobDefinition/app/plugin'],
-        exclude: ['text']
+        exclude: ['text'],
+        insertRequire: ['jobDefinition/app/plugin']
       }
     }
 
