@@ -1,0 +1,22 @@
+{
+  "private": true,
+  "name": "camunda-bpm-webapp",
+  "version": "7.3.0-SNAPSHOT",
+  "homepage": "http://camunda.org/",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "camunda",
+    "bpm",
+    "camunda bpm",
+    "cockpit"
+  ],
+  "license": "Apache-2.0",
+  "dependencies": {
+    "requirejs-text": "~2.0.12"
+
+  }
+}
