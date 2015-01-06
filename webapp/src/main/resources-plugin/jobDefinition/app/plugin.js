@@ -1,4 +1,7 @@
-require(['angular', './views/main', './data/main'],
+define(['angular', './views/main', './data/main'],
 function(angular, viewsModule, dataModule) {
   angular.module('cockpit.plugin.jobDefinition', [viewsModule.name, dataModule.name]);
 });
+
+
+require(['jobDefinition/app/plugin'],function(){});

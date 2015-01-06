@@ -19,30 +19,28 @@ module.exports = function(config) {
 
       paths: {
         'angular': 'empty:',
-        'text': '../../bower_components/requirejs-text/text'
+        'text': 'bower_components/requirejs-text/text'
       }
     },
 
     core: {
       options: {
         packages: [{"name":"cockpit-plugin-base",
-                    "location":"'<%= pkg.gruntConfig.pluginDir %>/base/app/",
-                    "main":"plugin"}
+                    "location":"'<%= pkg.gruntConfig.pluginDir %>/base/app/"}
                    ],
-        baseUrl: '<%= pkg.gruntConfig.pluginDir %>/base/app/',
+        baseUrl: '<%= pkg.gruntConfig.pluginDir %>',
         out: '<%= pkg.gruntConfig.buildTarget %>/base/app/plugin.js',
-        include: ['plugin'],
+        include: ['base/app/plugin'],
         exclude: ['text']
       }
     },
     jobDefinition: {
       options: {
         packages: [{"name":"cockpit-plugin-jobDefinition",
-                    "location":"<%= pkg.gruntConfig.pluginDir %>/jobDefinition/app/",
-                    "main":"plugin"}],
-        baseUrl: '<%= pkg.gruntConfig.pluginDir %>/jobDefinition/app/',
+                    "location":"<%= pkg.gruntConfig.pluginDir %>/jobDefinition/app/"}],
+        baseUrl: '<%= pkg.gruntConfig.pluginDir %>',
         out: '<%= pkg.gruntConfig.buildTarget %>/jobDefinition/app/plugin.js',
-        include: ['plugin'],
+        include: ['jobDefinition/app/plugin'],
         exclude: ['text']
       }
     }

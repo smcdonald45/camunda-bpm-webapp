@@ -8,7 +8,7 @@
  * @namespace cam.cockpit.plugin.base
  */
 console.log("loaded plugin js");
-require(['angular',
+define(['angular',
         './views/main',
         './resources/main',
         './data/main'
@@ -17,3 +17,6 @@ require(['angular',
   debugger;
   angular.module('cockpit.plugin.base', [viewsModule.name, resourcesModule.name, dataModule.name]);
 });
+
+
+require(['base/app/plugin'],function(){});
