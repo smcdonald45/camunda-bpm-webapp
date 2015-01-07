@@ -9,7 +9,6 @@
     "commit": "ddc6884c882a305264a27de02abbd77adb0c1d06"
   },
   "_source": "git://github.com/requirejs/text.git",
-  "_target": "~2.0.13",
-  "_originalSource": "requirejs-text",
-  "_direct": true
+  "_target": "~2.0.12",
+  "_originalSource": "requirejs-text"
 }
