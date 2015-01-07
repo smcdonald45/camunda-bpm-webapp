@@ -9,13 +9,11 @@ module.exports = function(config) {
     options: {
       stubModules: ['text'],
 
-      //optimize: 'uglify2',
-      optimize: 'none',
+      optimize: '<%= (mode === "prod") ? "uglify2" : "none" %>',
       preserveLicenseComments: false,
       generateSourceMaps: true,
 
       baseUrl: '<%= pkg.gruntConfig.pluginDir %>/',
-      // baseUrl: config.clientDir,
 
       paths: {
         'angular': 'empty:',

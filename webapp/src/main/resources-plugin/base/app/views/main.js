@@ -66,8 +66,6 @@ define([
   updateSuspensionStateDialogPI,
   activityInstanceStatisticsOverlayPI) {
 
-  console.log("in views main");
-
   var ngModule = angular.module('cockpit.plugin.base.views', []);
 
   ngModule.config(processDefinitionList);

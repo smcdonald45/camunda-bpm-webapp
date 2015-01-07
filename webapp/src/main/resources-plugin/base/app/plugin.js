@@ -12,5 +12,5 @@ define(['angular',
         './resources/main',
         './data/main'
 ], function(angular, viewsModule, resourcesModule, dataModule) {
-  angular.module('cockpit.plugin.base', [viewsModule.name, resourcesModule.name, dataModule.name]);
+  return angular.module('cockpit.plugin.base', [viewsModule.name, resourcesModule.name, dataModule.name]);
 });
